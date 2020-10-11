@@ -10,6 +10,8 @@ struct fib
     fib1 *f1;
     fib();
     int next();
+
+    ~fib();
 };
 
 struct fib1
@@ -18,6 +20,8 @@ struct fib1
     fib2 *f2;
     fib1();
     int next();
+
+    ~fib1();
 };
 
 struct fib2
@@ -26,6 +30,8 @@ struct fib2
     fib1 *f1;
     fib2();
     int next();
+
+    ~fib2();
 };
 
 fib::fib(): n(0), f1(NULL) {}
@@ -48,6 +54,10 @@ int fib2::next() {
     if (f1 == NULL) {f1 = new fib1();}
     return f->next() + f1->next();
 }
+
+fib::~fib() { if (f1) delete f1; }
+fib1::~fib1() { if (f2) delete f2; }
+fib2::~fib2() { if (f) delete f; if (f1) delete f1; }
 
 int main() {
     fib f;
