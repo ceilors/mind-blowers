@@ -55,9 +55,12 @@ int fib2::next() {
     return f->next() + f1->next();
 }
 
-fib::~fib() { if (f1) delete f1; }
-fib1::~fib1() { if (f2) delete f2; }
-fib2::~fib2() { if (f) delete f; if (f1) delete f1; }
+fib::~fib() { delete f1; }
+fib1::~fib1() { delete f2; }
+fib2::~fib2() {
+    delete f;
+    delete f1;
+}
 
 int main() {
     fib f;
